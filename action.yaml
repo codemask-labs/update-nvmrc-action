@@ -1,0 +1,70 @@
+name: Update .nvmrc file
+description: "Composite Github workflow for updating .nvmrc file."
+inputs:
+  use-only-lts:
+    required: false
+    default: 'true'
+    description: "Use LTS version of Node.js"
+  github-token:
+    required: true
+    description: "Used to create a pull request with suggested changes."
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4.2.2
+
+    - name: Fetch latest Node.js LTS version
+      id: node-version
+      shell: bash
+      run: |
+        if [[ "${{ inputs.use-only-lts }}" == "true" ]]; then
+          # Fetch the latest LTS version
+          NODE_VERSION=$(curl -s https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts != false)][0].version')
+        else
+          # Fetch the latest available version
+          NODE_VERSION=$(curl -s https://nodejs.org/dist/index.json | jq -r '.[0].version')
+        fi
+        echo "node_version=${NODE_VERSION}" >> $GITHUB_OUTPUT
+
+    - name: Update .nvmrc
+      shell: bash
+      run: echo "${{ steps.node-version.outputs.node_version }}" > .nvmrc
+
+    - name: Prepare branch name
+      id: branch-name
+      shell: bash
+      run: |
+        BRANCH_NAME="update-nvmrc-${{ steps.node-version.outputs.node_version }}"
+        echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
+
+    - name: Commit and push changes
+      id: commit-changes
+      shell: bash
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout -b ${{ steps.branch-name.outputs.branch_name }}
+        if ! git diff --exit-code .nvmrc; then
+          echo "nvmrc_changed=true" >> $GITHUB_OUTPUT
+          git add .nvmrc
+          git commit -m "build(node): update .nvmrc to Node.js ${{ steps.node-version.outputs.node_version }}"
+          git push --set-upstream https://github-actions:${{ inputs.github-token }}@github.com/${{ github.repository }} $BRANCH_NAME
+        else
+          echo "nvmrc_changed=false" >> $GITHUB_OUTPUT
+          echo "No changes detected in .nvmrc. Skipping commit and push."
+        fi
+
+    - name: Create Pull Request
+      if: steps.commit-changes.outputs.nvmrc_changed == 'true'
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        gh pr create \
+          -B main \
+          -H ${{ steps.branch-name.outputs.branch_name }} \
+          --title "build(node): update .nvmrc to Node.js ${{ steps.node-version.outputs.node_version  }}" \
+          --body "This PR updates the .nvmrc file to version: **${{ steps.node-version.outputs.node_version  }}**." \
+          --label "dependencies"

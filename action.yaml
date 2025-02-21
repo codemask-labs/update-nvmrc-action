@@ -1,5 +1,5 @@
-name: Update nvmrc file
-description: "Composite Github workflow for updating nvmrc file."
+name: Update .nvmrc file
+description: "Composite Github workflow for updating .nvmrc file."
 inputs:
   use-only-lts:
     required: false

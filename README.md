@@ -10,7 +10,7 @@ Use LTS version of Node.js. Default true.
 
 ### `github-token`
 
-**Required** Github token for creating a Pull request with latest version (similar to dependabot)
+**Required** Github token for creating a pull request with latest version (similar to dependabot)
 
 ## Example usage
 

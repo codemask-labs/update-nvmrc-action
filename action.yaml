@@ -7,7 +7,7 @@ inputs:
     description: "Use LTS version of Node.js"
   github-token:
     required: true
-    description: "Used to crate a pull request with suggested changes."
+    description: "Used to create a pull request with suggested changes."
 
 runs:
   using: composite

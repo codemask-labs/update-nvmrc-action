@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1](https://github.com/codemask-labs/update-nvmrc-action/compare/v1.2.0...v1.2.1) (2025-03-14)
+
+### Bug Fixes
+
+* issue with duplicated branch ([#6](https://github.com/codemask-labs/update-nvmrc-action/issues/6)) ([955c846](https://github.com/codemask-labs/update-nvmrc-action/commit/955c846df547627ec1aa58449c830ad42b60bbe3))
+
 ## 1.2.0 (2025-03-14)
 
 ### Features

@@ -2,7 +2,7 @@ name: Update .nvmrc file
 description: "Composite Github workflow for updating .nvmrc file."
 branding:
   icon: 'box'
-  color: 'green'
+  color: 'blue'
 
 inputs:
   use-only-lts:

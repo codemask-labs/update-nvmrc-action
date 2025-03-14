@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.2](https://github.com/codemask-labs/update-nvmrc-action/compare/v1.2.1...v1.2.2) (2025-03-14)
+
+### Bug Fixes
+
+* check if branch exists before commit ([#7](https://github.com/codemask-labs/update-nvmrc-action/issues/7)) ([b70a9ba](https://github.com/codemask-labs/update-nvmrc-action/commit/b70a9ba0b6e4bdfe16f5d2afb174ad3917b41293))
+
 ## [1.2.1](https://github.com/codemask-labs/update-nvmrc-action/compare/v1.2.0...v1.2.1) (2025-03-14)
 
 ### Bug Fixes

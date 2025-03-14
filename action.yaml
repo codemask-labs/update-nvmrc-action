@@ -43,8 +43,7 @@ runs:
       id: check-branch
       shell: bash
       run: |
-        if git show-ref --verify --quiet "refs/heads/${{ steps.branch-name.outputs.branch_name }}"; then
-          echo "Branch ${{ steps.branch-name.outputs.branch_name }} already exists. Skipping branch creation."
+        if git ls-remote --exit-code --heads origin "${{ steps.branch-name.outputs.branch_name }}"; then
           echo "branch_exists=true" >> $GITHUB_OUTPUT
         else
           echo "branch_exists=false" >> $GITHUB_OUTPUT

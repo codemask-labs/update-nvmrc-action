@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: ./
+      - uses: codemask-labs/release-it@v1.1.2
         with:
           no-npm: "true"
           git-user: "Codemask Labs"

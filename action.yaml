@@ -39,13 +39,26 @@ runs:
         BRANCH_NAME="update-nvmrc-${{ steps.node-version.outputs.node_version }}"
         echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
 
+    - name: Check if branch already exists
+      id: check-branch
+      shell: bash
+      run: |
+        if git show-ref --verify --quiet "refs/heads/${{ steps.branch-name.outputs.branch_name }}"; then
+          echo "Branch ${{ steps.branch-name.outputs.branch_name }} already exists. Skipping branch creation."
+          echo "branch_exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "branch_exists=false" >> $GITHUB_OUTPUT
+        fi
+
     - name: Commit and push changes
       id: commit-changes
+      if: steps.check-branch.outputs.branch_exists == 'false'
       shell: bash
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git checkout -b ${{ steps.branch-name.outputs.branch_name }}
+
         if ! git diff --exit-code .nvmrc; then
           echo "nvmrc_changed=true" >> $GITHUB_OUTPUT
           git add .nvmrc

@@ -33,7 +33,6 @@ jobs:
 
       - uses: codemask-labs/release-it@v1.1.2
         with:
-          no-npm: "true"
           git-user: "Codemask Labs"
           git-email: "contact@codemask.com"
           git-token: ${{ secrets.GITHUB_TOKEN }}

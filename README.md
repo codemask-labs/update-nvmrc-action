@@ -2,6 +2,11 @@
 
 Composite Github workflow for updating `.nvmrc` file.
 
+## Prerequisites
+To start using this action, you need to grant GitHub Actions permission to create pull requests. You can do this by enabling the option "Allow GitHub Actions to create and approve pull requests" in your GitHub organization settings (Settings → Actions → General). 
+
+```yaml
+
 ## Inputs
 
 ### `use-only-lts`

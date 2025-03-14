@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0](https://github.com/codemask-labs/update-nvmrc-action/compare/v1.2.2...v1.3.0) (2025-03-14)
+
+### Features
+
+* added branding ([#9](https://github.com/codemask-labs/update-nvmrc-action/issues/9)) ([fa63e30](https://github.com/codemask-labs/update-nvmrc-action/commit/fa63e303cfbd0431c162a3d2b041bbbb5f583e07))
+
 ## [1.2.2](https://github.com/codemask-labs/update-nvmrc-action/compare/v1.2.1...v1.2.2) (2025-03-14)
 
 ### Bug Fixes

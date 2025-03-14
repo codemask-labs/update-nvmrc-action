@@ -52,7 +52,7 @@ runs:
 
     - name: Commit and push changes
       id: commit-changes
-      if: steps.check-branch.outputs.branch_exists == 'false'
+      if: ${{ steps.check-branch.outputs.branch_exists == 'false' }}
       shell: bash
       run: |
         git config --global user.name "github-actions[bot]"
@@ -70,7 +70,7 @@ runs:
         fi
 
     - name: Create Pull Request
-      if: steps.commit-changes.outputs.nvmrc_changed == 'true'
+      if: ${{ steps.commit-changes.outputs.nvmrc_changed == 'true' }}
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}

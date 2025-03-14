@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: codemask-labs/update-nvmrc-action@v1.2.0
+      - uses: codemask-labs/update-nvmrc-action@v1.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```

@@ -15,11 +15,6 @@ on:
         description: "Dry run"
         required: true
         default: true
-      no-npm:
-        type: boolean
-        description: "Skip push to npm"
-        required: true
-        default: false
 
 permissions:
   contents: write
@@ -38,9 +33,9 @@ jobs:
 
       - uses: ./
         with:
+          no-npm: "true"
           git-user: "Codemask Labs"
           git-email: "contact@codemask.com"
           git-token: ${{ secrets.GITHUB_TOKEN }}
           release-branch: ${{ inputs.release-branch }}
           dry-run: ${{ inputs.dry-run }}
-          no-npm: ${{ inputs.no-npm }}

@@ -51,7 +51,7 @@ runs:
 
     - name: Commit and push changes
       id: commit-changes
-      if: ${{ steps.check-branch.outputs.branch_exists == 'false' }}
+      if: steps.check-branch.outputs.branch_exists == 'false'
       shell: bash
       run: |
         git config --global user.name "github-actions[bot]"
